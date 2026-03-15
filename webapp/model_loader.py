@@ -4,15 +4,15 @@ import os
 import gdown
 
 device = "cpu"
-
 num_classes = 4
 
-MODEL_PATH = "models/weld_final.pth"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MODEL_PATH = os.path.join(BASE_DIR, "models", "weld_final.pth")
 
 # download model if not present
 if not os.path.exists(MODEL_PATH):
 
-    os.makedirs("models", exist_ok=True)
+    os.makedirs(os.path.join(BASE_DIR, "models"), exist_ok=True)
 
     print("Downloading model from Google Drive...")
 
@@ -20,13 +20,12 @@ if not os.path.exists(MODEL_PATH):
 
     gdown.download(url, MODEL_PATH, quiet=False)
 
-
 model = torchvision.models.detection.retinanet_resnet50_fpn(weights=None)
 
 num_anchors = model.head.classification_head.num_anchors
 in_channels = model.backbone.out_channels
 
-model.head.classification_head = torchvision.models.detection.retinanet.RetinaNetClassificationHead(
+model.head.classification_head = torchvision.models.detection.RetinaNetClassificationHead(
     in_channels,
     num_anchors,
     num_classes
