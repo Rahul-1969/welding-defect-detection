@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Welding Defect Detection</title>
+
+<link rel="stylesheet" href="/static/style.css">
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav>
+
+<h2>WeldAI</h2>
+
+<ul>
+<li><a href="#" onclick="openAbout()">About</a></li>
+</ul>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+<h1>Automated Welding Defect Detection</h1>
+
+<p>
+AI powered inspection system using Convolutional Neural Networks
+to detect welding defects automatically.
+</p>
+
+</section>
+
+
+<!-- ================= UPLOAD SECTION ================= -->
+
+<section class="upload-section">
+
+<h2>Upload Welding Image</h2>
+
+<input type="file" id="imageInput" accept="image/*">
+
+<br><br>
+
+<button onclick="detectDefect()">Detect Defect</button>
+
+<br><br>
+
+<!-- Uploaded Image Preview -->
+
+<h3>Uploaded Image</h3>
+
+<img id="inputPreview" style="max-width:600px; display:none; margin-top:10px;">
+
+<br><br>
+
+<!-- Result Image -->
+
+<h3>Detection Result</h3>
+
+<img id="resultImage" style="max-width:600px; display:none; margin-top:10px; border:2px solid #ddd;">
+
+<h3 id="result"></h3>
+
+</section>
+
+
+<!-- ================= ABOUT MODAL ================= -->
+
+<div id="aboutModal" class="modal">
+
+<div class="modal-content">
+
+<span class="close" onclick="closeAbout()">&times;</span>
+
+<h2>About the Project</h2>
+
+<p>
+
+The quality of welded joints is crucial in industries such as aerospace,
+defence and construction. Defects in welds can lead to catastrophic failures,
+making early detection essential.
+
+Traditional inspection methods such as manual inspection and radiographic
+analysis require skilled personnel and significant time.
+
+This project develops an automated inspection system using
+deep learning and Convolutional Neural Networks.
+
+A RetinaNet object detection model with a ResNet50 backbone is trained
+on welding defect datasets to detect defects such as cracks,
+porosity and inclusions.
+
+Users can upload welding images and the system automatically detects
+defects while visualizing their locations using bounding boxes.
+
+</p>
+
+</div>
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+<p>© 2026 Welding Defect Detection Project</p>
+
+</footer>
+
+
+<script src="/static/script.js"></script>
+
+</body>
+
+</html>

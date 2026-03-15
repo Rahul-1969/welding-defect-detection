@@ -1,0 +1,14 @@
+# datasets
+The Welding Defect Dataset - v1/
+The Welding Defect Dataset - v2/
+
+# trained models
+models/
+
+# uploads
+webapp/uploads/
+
+# python cache
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
