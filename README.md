@@ -76,23 +76,28 @@ The model predicts bounding boxes around welding defects along with confidence s
 
 ## Project Structure
 
+```
 Welding-Defect-Detection
 │
-├── notebooks/ # Training notebooks
-├── scripts/ # Dataset utilities and visualization
+├── notebooks/                # Training notebooks
+├── scripts/                  # Dataset utilities and visualization
 │
 ├── webapp/
-│ ├── app.py # Flask application
-│ ├── detect.py # Prediction and visualization logic
-│ ├── model_loader.py # Model loading
-│ │
-│ ├── static/
-│ │ ├── style.css
-│ │ └── script.js
-│ │
-│ └── templates/
-│ └── index.html
+│   ├── app.py                # Flask application
+│   ├── detect.py             # Prediction and visualization logic
+│   ├── model_loader.py       # Model loading
+│
+│   ├── static/
+│   │   ├── style.css
+│   │   └── script.js
+│
+│   └── templates/
+│       └── index.html
+│
+├── Dockerfile
+├── requirements.txt
 └── README.md
+```
 
 ## How the System Works
 
