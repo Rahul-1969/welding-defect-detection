@@ -130,6 +130,3 @@ Rahul Kusumani
 Computer Science Engineering
 
 Project: Welding Defect Detection using Deep Learning
-│
-├── Dockerfile
-├── requirements.tx
