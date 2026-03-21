@@ -39,7 +39,7 @@ Result Display
 
 Programming Language  
 - Python
-- 
+
 Deep Learning Framework  
 - PyTorch  
 - Torchvision
