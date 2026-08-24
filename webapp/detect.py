@@ -1,5 +1,6 @@
 import cv2
 import torch
+import os
 from model_loader import model
 
 device = "cpu"
@@ -32,39 +33,56 @@ def predict(image_path):
     threshold = 0.3
 
     detected = False
+    detected_count = 0
+    max_score = 0.0
+    valid_scores = []
+    valid_labels = []
 
-    for box,score,label in zip(boxes,scores,labels):
+    for box, score, label in zip(boxes, scores, labels):
 
         if score < threshold:
             continue
 
         detected = True
+        detected_count += 1
+        if score > max_score:
+            max_score = float(score)
+        valid_scores.append(float(score))
+        valid_labels.append(int(label))
 
-        x1,y1,x2,y2 = map(int,box)
+        x1, y1, x2, y2 = map(int, box)
 
         class_name = CLASS_NAMES[label]
 
         text = f"{class_name} {score:.2f}"
 
-        cv2.rectangle(original,(x1,y1),(x2,y2),(0,0,255),2)
+        cv2.rectangle(original, (x1, y1), (x2, y2), (0, 0, 255), 2)
 
         cv2.putText(
             original,
             text,
-            (x1,y1-10),
+            (x1, y1 - 10),
             cv2.FONT_HERSHEY_SIMPLEX,
             0.6,
-            (0,0,255),
+            (0, 0, 255),
             2
         )
 
-    output_path = image_path.replace(".jpg","_result.jpg")
+    base, ext = os.path.splitext(image_path)
+    output_path = f"{base}_result.jpg"
 
-    cv2.imwrite(output_path,original)
+    cv2.imwrite(output_path, original)
 
     if detected:
         result = "Bad Weld (Defect Detected)"
     else:
         result = "Good Weld"
 
-    return result, output_path
+    details = {
+        "detected_count": detected_count,
+        "max_score": max_score,
+        "scores": valid_scores,
+        "labels": [CLASS_NAMES[l] for l in valid_labels]
+    }
+
+    return result, output_path, details
