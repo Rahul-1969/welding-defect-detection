@@ -71,7 +71,9 @@ def predict(image_path):
     base, ext = os.path.splitext(image_path)
     output_path = f"{base}_result.jpg"
 
-    cv2.imwrite(output_path, original)
+    write_ok = cv2.imwrite(output_path, original)
+    if not write_ok:
+        raise RuntimeError(f"cv2.imwrite failed — could not save result image: {output_path}")
 
     if detected:
         result = "Bad Weld (Defect Detected)"
