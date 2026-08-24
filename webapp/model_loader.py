@@ -1,5 +1,6 @@
 import torch
 import torchvision
+from torchvision.models.detection.retinanet import RetinaNetClassificationHead
 import os
 import gdown
 
@@ -20,12 +21,12 @@ if not os.path.exists(MODEL_PATH):
 
     gdown.download(url, MODEL_PATH, quiet=False)
 
-model = torchvision.models.detection.retinanet_resnet50_fpn(weights=None)
+model = torchvision.models.detection.retinanet_resnet50_fpn(weights=None, weights_backbone=None)
 
 num_anchors = model.head.classification_head.num_anchors
 in_channels = model.backbone.out_channels
 
-model.head.classification_head = torchvision.models.detection.RetinaNetClassificationHead(
+model.head.classification_head = RetinaNetClassificationHead(
     in_channels,
     num_anchors,
     num_classes
