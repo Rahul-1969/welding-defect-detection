@@ -53,13 +53,16 @@ def detect():
             }), 500
 
         result_filename = os.path.basename(output_path)
-        has_defect = details["detected_count"] > 0 or "Defect" in result
+        if result in ["Bad Weld", "Defect"]:
+            status = "DEFECT DETECTED"
+        else:
+            status = "NO DEFECT DETECTED"
 
         return jsonify({
             "success": True,
             "result": result,
             "image": "/uploads/" + result_filename,
-            "status": "DEFECT DETECTED" if has_defect else "GOOD WELD",
+            "status": status,
             "detections_count": details["detected_count"],
             "confidence": details["max_score"],
             "processing_time": processing_time,
